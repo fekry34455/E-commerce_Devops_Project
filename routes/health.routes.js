@@ -1,23 +1,13 @@
 const express = require("express");
 const asyncHandler = require("../middlewares/asyncHandler");
+const {
+  healthCheck,
+  healthError,
+} = require("../controllers/health.controller");
 
 const router = express.Router();
 
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    res.status(200).json({
-      status: "success",
-      message: "API is healthy",
-    });
-  })
-);
-
-router.get(
-  "/error",
-  asyncHandler(async (req, res) => {
-    throw new Error("Async error test");
-  })
-);
+router.get("/", asyncHandler(healthCheck));
+router.get("/error", asyncHandler(healthError));
 
 module.exports = router;
