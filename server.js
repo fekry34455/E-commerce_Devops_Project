@@ -2,6 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 
+
+const connectDB = require("./config/database");
+
+// Connect to database
+connectDB();
+
 const app = express();
 // Middleware
 app.use(express.json());
@@ -9,12 +15,12 @@ app.use(express.json());
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("Server is running");
+    res.send("Server is running");
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
 // const dbConnection = require("./config/database");
 // dbConnection();
